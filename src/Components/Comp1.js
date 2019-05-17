@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 import { mostrar_productos, agregar_producto } from '../actions/productosActions';
+
+
+import Product from "./Product";
 
 class Comp1 extends Component {
 
@@ -14,6 +17,7 @@ class Comp1 extends Component {
     }
 
     agregar_nuevo_producto = () => {
+        if (this.state.name == '') return;
         this.props.agregar_producto({
             name: this.state.name,
             id: 3,
@@ -22,7 +26,7 @@ class Comp1 extends Component {
         });
 
         this.setState({
-            name:''
+            name: ''
         })
     }
 
@@ -30,17 +34,18 @@ class Comp1 extends Component {
         const { productos } = this.props;
 
         return (
+
             <div className="comp">
 
                 <h4>Desde componente 1</h4>
-                <ul>
-                    {Object.keys(productos).map(p => {
-                        return (
-                            <li key={p}>{productos[p].name}</li>
-                        )
-                    })
-                    }
-                </ul>
+
+                {Object.keys(productos).map(p => {
+                    return (
+                        <Product key={p} producto={productos[p]} />
+                    )
+                })
+                }
+
                 <span>Producto</span>
                 <input type="text"
                     onChange={(e) => {

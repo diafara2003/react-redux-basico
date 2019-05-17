@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mostrar_productos } from '../actions/productosActions';
 
+import Product   from "./Product";
 
 class Comp2 extends Component {
 
@@ -21,7 +22,8 @@ class Comp2 extends Component {
                 <div>
                     {Object.keys(productos).map(p => {
                         return (
-                            <div className="productos" key={p}>{productos[p].name} </div>
+                            <Product key={p}  producto={productos[p]}/>
+                            
                         )
                     })}
                 </div>
